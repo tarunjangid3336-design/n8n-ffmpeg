@@ -1,7 +1,11 @@
-FROM docker.n8n.io/n8nio/n8n
+FROM node:18-bullseye
 
 USER root
 
-RUN apk update && apk add ffmpeg
+RUN apt-get update && \
+    apt-get install -y ffmpeg curl && \
+    npm install -g n8n
 
-USER node 
+EXPOSE 5678
+
+CMD ["n8n"]
